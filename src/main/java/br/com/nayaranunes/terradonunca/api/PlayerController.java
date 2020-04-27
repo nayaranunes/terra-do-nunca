@@ -26,8 +26,11 @@ public class PlayerController {
 
     @GetMapping
     public List<Player> getAllPlayers() {
+        System.out.println("Nayara");
         return playerService.getAllPlayers();
+
     }
+
 
     @PutMapping("/{cpf}")
     public void updatePlayerByCPF(@PathVariable("cpf") String cpf, @RequestBody PlayerRequest request) {
