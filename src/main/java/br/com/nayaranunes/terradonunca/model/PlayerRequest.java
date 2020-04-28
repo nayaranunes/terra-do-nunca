@@ -3,7 +3,6 @@ package br.com.nayaranunes.terradonunca.model;
 import org.hibernate.validator.constraints.br.CPF;
 
 public class PlayerRequest {
-    //usuariooo
     private String name;
     @CPF
     private String cpf;
@@ -13,7 +12,7 @@ public class PlayerRequest {
         this.cpf = cpf;
     }
 
-    PlayerRequest(){
+    public PlayerRequest(){
         super();
     }
 

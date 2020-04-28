@@ -6,8 +6,6 @@ import java.util.List;
 
 public class TeamResponse {
     private String coach;
-    //@org.hibernate.validator.constraints.br.CNPJ
-    //@CNPJ
     private String cnpj;
     private String name;
   //  private List<String> listOfPlayersCPF;

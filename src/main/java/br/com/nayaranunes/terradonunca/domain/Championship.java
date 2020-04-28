@@ -8,6 +8,7 @@ public class Championship {
     private Long id;
     private String name;
     private List<String> teams;
+    private String phase;
 
     public Championship() {
         super();
@@ -58,5 +59,13 @@ public class Championship {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getPhase() {
+        return phase;
+    }
+
+    public void setPhase(String phase) {
+        this.phase = phase;
     }
 }

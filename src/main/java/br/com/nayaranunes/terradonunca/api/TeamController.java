@@ -24,22 +24,27 @@ public class TeamController {
     private void addTeam(@RequestBody TeamRequest request){ //gets the json and saves the team
         teamService.addTeam(request);
     }
+
     @GetMapping
     public List<Team> getAllTeams(){
         return teamService.getAllTeams();
     }
+
     @PutMapping("/{cnpj}")
     public void updateTeamByCNPJ(@PathVariable("cnpj") String cnpj, @RequestBody TeamRequest request) {
         teamService.updateTeamByCNPJ(cnpj, request);
     }
+
     @DeleteMapping("/{cnpj}")
     public void deleteTeamByCNPJ(@PathVariable("cnpj") String cnpj) {
         teamService.deleteTeamByCNPJ(cnpj);
     }
+
     @GetMapping("/{cnpj}")
     public TeamResponse getTeamByCNPJ(@PathVariable("cnpj") String cnpj) {
         return teamService.getTeamByCNPJ(cnpj);
     }
+
     @GetMapping("/players/{cnpj}")
     public List<Player> getAllPlayersOfTeam(@PathVariable("cnpj") String cnpj){
         return teamService.getAllPlayersByCnpj(cnpj);

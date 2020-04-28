@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -34,7 +35,7 @@ public class PlayerService {
         return playerRepository.insertPlayer(player);
     }
 
-    boolean playerAlreadyExists(String cpf) {
+    public boolean playerAlreadyExists(String cpf) {
         return playerRepository.playerAlreadyExists(cpf);
     }
 
@@ -46,15 +47,21 @@ public class PlayerService {
         return new PlayerResponse(player.getName(), player.getCPF());
     }
 
-    public List<Player> getAllPlayers() {
+    public List<PlayerResponse> getAllPlayers() {
         if (playerRepository.selectAllPlayers() == null) {
             throw new ApiRequestException("None player exists");
         }
-        return playerRepository.selectAllPlayers();
+        List<Player> players = playerRepository.selectAllPlayers();
+        List<PlayerResponse> responses = new ArrayList<>();
+        for (Player p : players) {
+            PlayerResponse response = new PlayerResponse(p.getName(), p.getCPF());
+            responses.add(response);
+        }
+        return responses;
     }
 
     public int deletePlayerByCPF(String cpf) {
-        if (playerRepository.deletePlayerByCPF(cpf) == 00) {
+        if (playerRepository.deletePlayerByCPF(cpf) == 0) {
             throw new ApiRequestException("This player doesn't exists");
         }
         return playerRepository.deletePlayerByCPF(cpf);
