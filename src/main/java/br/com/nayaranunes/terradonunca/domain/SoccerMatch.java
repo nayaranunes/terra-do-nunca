@@ -28,4 +28,5 @@ public class SoccerMatch {
     public void setTeamTwo(Team teamTwo) {
         this.teamTwo = teamTwo;
     }
+
 }

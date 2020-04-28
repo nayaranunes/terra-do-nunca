@@ -1,14 +1,13 @@
 package br.com.nayaranunes.terradonunca.model;
 
-import br.com.nayaranunes.terradonunca.domain.Player;
+import org.hibernate.validator.constraints.br.CNPJ;
 
 import java.util.List;
 
 public class TeamRequest {
 
     private String coach;
-    //@org.hibernate.validator.constraints.br.CNPJ
-    //@CNPJ
+    @CNPJ
     private String cnpj;
     private String name;
     private List<String> listOfPlayersCPF;
