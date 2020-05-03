@@ -1,0 +1,11 @@
+version: '2'
+services:
+  postgres:
+    image: postgres:9.6
+    ports:
+      - "5431:5432"
+    environment:
+      - POSTGRES_DB=terradonuncadb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=senha
+      - MAX_CONNECTIONS=300
