@@ -1,13 +1,19 @@
 package br.com.nayaranunes.terradonunca.domain;
 
-
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Objects;
 
-//@Entity javax
-public class Player {
-    //@Id
+@Entity
+@Table(name = "player")
+public class Player implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotNull
     private String name;
+    @NotNull
     private String CPF;
     private boolean hasTime;
     //MASTER bd DOMINIO
