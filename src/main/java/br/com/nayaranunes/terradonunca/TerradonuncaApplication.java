@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-@SpringBootApplication//(exclude = {HibernateJpaAutoConfiguration.class})
+@SpringBootApplication(exclude = {HibernateJpaAutoConfiguration.class})
 @EntityScan("br.com.nayaranunes.terradonunca.domain")///{DataSourceAutoConfiguration.class})
 public class TerradonuncaApplication {
 
