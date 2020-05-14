@@ -1,6 +1,5 @@
 package br.com.nayaranunes.terradonunca.api;
 
-import br.com.nayaranunes.terradonunca.domain.Player;
 import br.com.nayaranunes.terradonunca.model.PlayerRequest;
 import br.com.nayaranunes.terradonunca.model.PlayerResponse;
 import br.com.nayaranunes.terradonunca.service.PlayerService;

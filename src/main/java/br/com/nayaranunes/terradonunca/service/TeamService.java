@@ -6,6 +6,7 @@ import br.com.nayaranunes.terradonunca.exception.ApiRequestException;
 import br.com.nayaranunes.terradonunca.model.TeamRequest;
 import br.com.nayaranunes.terradonunca.model.TeamResponse;
 //import br.com.nayaranunes.terradonunca.repository.PlayerDataAcessService;
+import br.com.nayaranunes.terradonunca.repository.TeamDataAcessService;
 import br.com.nayaranunes.terradonunca.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,13 +17,10 @@ import java.util.Random;
 
 @Service
 public class TeamService {
-    private final TeamRepository teamRepository;
+
+    private TeamRepository teamRepository = new TeamDataAcessService();
 //    PlayerDataAcessService playerRepository = new PlayerDataAcessService();
 
-    @Autowired
-    public TeamService(@Qualifier("teamRepository") TeamRepository teamRepository) {
-        this.teamRepository = teamRepository;
-    }
 
 //    PlayerDataAcessService playerDataAcessService = new PlayerDataAcessService();
 //    PlayerService playerService = new PlayerService(playerDataAcessService);

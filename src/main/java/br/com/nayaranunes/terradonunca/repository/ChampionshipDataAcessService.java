@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository("championshipRepository")
+//@Repository("championshipRepository")
 public class ChampionshipDataAcessService implements ChampionshipRepository {
     public static List<Championship> DBC = new ArrayList<>();
 

@@ -2,6 +2,7 @@ package br.com.nayaranunes.terradonunca.service;
 
 import br.com.nayaranunes.terradonunca.domain.*;
 import br.com.nayaranunes.terradonunca.exception.ApiRequestException;
+import br.com.nayaranunes.terradonunca.repository.ChampionshipDataAcessService;
 import br.com.nayaranunes.terradonunca.repository.ChampionshipRepository;
 import br.com.nayaranunes.terradonunca.repository.TeamDataAcessService;
 import br.com.nayaranunes.terradonunca.repository.TeamRepository;
@@ -16,18 +17,11 @@ import java.util.Random;
 @Service
 public class ChampionshipService {
 
-    private final ChampionshipRepository championshipRepository;
-
-    TeamDataAcessService teamDataAcessService = new TeamDataAcessService();
-    TeamService teamService = new TeamService(teamDataAcessService);
+    private ChampionshipRepository championshipRepository = new ChampionshipDataAcessService();
+    private TeamService teamService = new TeamService();
 
     //List<NextPhase> DBNextPhase = new ArrayList<>();
     NextPhase nextPhase = new NextPhase();
-
-    @Autowired
-    public ChampionshipService(@Qualifier("championshipRepository") ChampionshipRepository championshipRepository) {
-        this.championshipRepository = championshipRepository;
-    }
 
     public Long addChampionship(Championship championship) {
         Random random = new Random();

@@ -31,7 +31,7 @@ public class PlayerService {
         if (playerAlreadyExists(request.getCPF())) {
             throw new ApiRequestException("The player already exists");
         }
-        Player player = new Player(request.getName(), request.getCPF());
+        //Player player = new Player(request.getName(), request.getCPF());
 //        return playerRepository.insertPlayer(player);
         return 1;
     }

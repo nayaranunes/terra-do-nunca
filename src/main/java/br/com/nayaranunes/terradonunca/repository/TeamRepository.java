@@ -1,6 +1,5 @@
 package br.com.nayaranunes.terradonunca.repository;
 
-import br.com.nayaranunes.terradonunca.domain.Player;
 import br.com.nayaranunes.terradonunca.domain.Team;
 import br.com.nayaranunes.terradonunca.model.TeamRequest;
 

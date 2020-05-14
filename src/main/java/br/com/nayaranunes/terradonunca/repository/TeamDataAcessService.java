@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository("teamRepository")
+//@Repository("teamRepository")
 public class TeamDataAcessService implements TeamRepository {
 
     public static List<Team> DBT = new ArrayList<>();

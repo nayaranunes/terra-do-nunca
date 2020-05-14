@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS players (
-    id          INTEGER PRIMARY KEY NOT NULL,
-    name        CHARACTER NOT NULL,
-    cpf         CHARACTER NOT NULL,
-    hasTime     boolean
+    id                  INTEGER     NOT NULL    PRIMARY KEY,
+    name_player         CHARACTER   NOT NULL,
+    cpf                 CHARACTER   NOT NULL,
+    has_time            boolean
 );
 /*
 CREATE TABLE IF NOT EXISTS teams (

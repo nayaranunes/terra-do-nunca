@@ -1,3 +1,4 @@
+/*
 package br.com.nayaranunes.terradonunca.test;
 
 import br.com.nayaranunes.terradonunca.domain.Player;
@@ -50,3 +51,4 @@ public class TeamTest {
         Assertions.assertThat(request.getListOfPlayersCPF()).isEqualTo(listCPF);
     }
 }
+*/

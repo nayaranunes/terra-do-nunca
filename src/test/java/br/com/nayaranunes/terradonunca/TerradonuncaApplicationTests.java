@@ -1,3 +1,4 @@
+/*
 package br.com.nayaranunes.terradonunca;
 
 import br.com.nayaranunes.terradonunca.domain.Player;
@@ -22,10 +23,13 @@ class TerradonuncaApplicationTests {
 	void contextLoads() {
 	}
 
-	/*
+	*/
+/*
 		A test has three steps:
 		1. scenario
 		2. action
 		3. verification
-	*/
+	*//*
+
 }
+*/

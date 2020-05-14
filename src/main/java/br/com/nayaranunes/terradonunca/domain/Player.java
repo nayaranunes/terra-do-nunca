@@ -5,26 +5,18 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "players")
-public class Player implements Serializable {   //implements Serializable {
+public class Player implements Serializable {
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Integer id;
-  //  @NotNull
-    @Column(name = "name")
-    private String name;
-   // @NotNull
+    @Column(name = "name_player")
+    private String namePlayer;
     @Column(name = "cpf")
     private String CPF;
-    @Column(name = "hasTime")
+    @Column(name = "has_time")
     private boolean hasTime;
 
     public Player() {
-    }
-
-    public Player(String name, String CPF) {
-        this.name = name;
-        this.CPF = CPF;
     }
 
     public Integer getId() {
@@ -35,12 +27,12 @@ public class Player implements Serializable {   //implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNamePlayer() {
+        return namePlayer;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNamePlayer(String namePlayer) {
+        this.namePlayer = namePlayer;
     }
 
     public String getCPF() {
