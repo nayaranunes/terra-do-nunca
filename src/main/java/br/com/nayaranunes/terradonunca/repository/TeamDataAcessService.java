@@ -14,11 +14,11 @@ public class TeamDataAcessService implements TeamRepository {
     public static List<Team> DBT = new ArrayList<>();
     public static List<String> CNPJT = new ArrayList<>();
 
-    PlayerDataAcessService playerDataAcessService = new PlayerDataAcessService();
-    PlayerService playerService = new PlayerService(playerDataAcessService);
+    //PlayerDataAcessService playerDataAcessService = new PlayerDataAcessService();
+    //PlayerService playerService = new PlayerService(playerDataAcessService);
     @Override
     public int insertTeam(Team team) {
-        team.setListOfPlayers(playerService.getPlayersByCPFList(team.getListOfPlayersCPF()));
+   //     team.setListOfPlayers(playerService.getPlayersByCPFList(team.getListOfPlayersCPF()));
         DBT.add(team);
         CNPJT.add(team.getCNPJ());
         return 1;

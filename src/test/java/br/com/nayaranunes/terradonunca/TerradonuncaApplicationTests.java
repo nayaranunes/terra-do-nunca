@@ -2,9 +2,9 @@ package br.com.nayaranunes.terradonunca;
 
 import br.com.nayaranunes.terradonunca.domain.Player;
 import br.com.nayaranunes.terradonunca.model.PlayerRequest;
-import br.com.nayaranunes.terradonunca.repository.PlayerRepository;
+//import br.com.nayaranunes.terradonunca.repository.PlayerRepository;
 import br.com.nayaranunes.terradonunca.service.PlayerService;
-import br.com.nayaranunes.terradonunca.test.PlayerTest;
+//import br.com.nayaranunes.terradonunca.test.PlayerTest;
 import org.assertj.core.api.Assertions;
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import org.springframework.util.Assert;
 
 import javax.validation.constraints.AssertTrue;
 
-@SpringBootTest(classes = PlayerTest.class)
+//@SpringBootTest(classes = PlayerTest.class)
 class TerradonuncaApplicationTests {
 
 	@Test

@@ -1,38 +1,37 @@
 package br.com.nayaranunes.terradonunca.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
-@Table(name = "player")
-public class Player implements Serializable {
+@Table(name = "players")
+public class Player implements Serializable {   //implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @NotNull
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Integer id;
+  //  @NotNull
+    @Column(name = "name")
     private String name;
-    @NotNull
+   // @NotNull
+    @Column(name = "cpf")
     private String CPF;
+    @Column(name = "hasTime")
     private boolean hasTime;
-    //MASTER bd DOMINIO
 
     public Player() {
-        super();
     }
 
-    public Player(Long id, String name, String CPF) {
-        this.id = id;
+    public Player(String name, String CPF) {
         this.name = name;
         this.CPF = CPF;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -58,21 +57,5 @@ public class Player implements Serializable {
 
     public void setHasTime(boolean hasTime) {
         this.hasTime = hasTime;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Player player = (Player) o;
-        return hasTime == player.hasTime &&
-                id.equals(player.id) &&
-                Objects.equals(name, player.name) &&
-                Objects.equals(CPF, player.CPF);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, CPF, hasTime);
     }
 }

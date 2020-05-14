@@ -1,13 +1,22 @@
 package br.com.nayaranunes.terradonunca.domain;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
+//@Entity
+//@Table(name = "championship")
 public class Championship {
-    private int qtdOfTeams;
-    private int year;
+    //@Id
+   // @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+   // @NotNull
+    private int qtdOfTeams;
+    //@NotNull
+    private int year;
+    //@NotNull
     private String name;
-    private List<String> teams;
+    private List<String>  teams;
     private String phase;
 
     public Championship() {
@@ -53,6 +62,7 @@ public class Championship {
         this.teams = teams;
     }
 
+    @Id
     public Long getId() {
         return id;
     }

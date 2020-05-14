@@ -1,15 +1,24 @@
 package br.com.nayaranunes.terradonunca.domain;
 
-import org.hibernate.validator.constraints.br.CNPJ;
-
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
-public class Team {
 
+//@Entity
+//@Table(name = "teams")
+public class Team {
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    //@NotNull
     private String coach;
+    //@NotNull
     private String cnpj;
+    //@NotNull
     private String name;
+    //@NotBlank
     private List<String> listOfPlayersCPF;
     private List<Player> listOfPlayers;
 

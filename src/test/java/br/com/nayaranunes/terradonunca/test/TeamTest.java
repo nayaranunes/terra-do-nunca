@@ -32,7 +32,7 @@ public class TeamTest {
     @Before
     public void setup() {
         teamService = new TeamService(teamRepository);
-        player = new Player(1L,"Ronaldo", "54545");
+        player = new Player("Ronaldo", "54545");
         listCPF.add("54545");
         request = new TeamRequest("Mauro", "5454-5", "Para", listCPF);
     }

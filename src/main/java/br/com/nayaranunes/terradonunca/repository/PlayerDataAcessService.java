@@ -1,3 +1,4 @@
+/*
 package br.com.nayaranunes.terradonunca.repository;
 
 import br.com.nayaranunes.terradonunca.domain.Player;
@@ -87,3 +88,4 @@ public class PlayerDataAcessService implements PlayerRepository {
         return (CPFP.contains(cpf));
     }
 }
+*/

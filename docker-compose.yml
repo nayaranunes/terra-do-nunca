@@ -9,3 +9,5 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=senha
       - MAX_CONNECTIONS=300
+    volumes:
+      - ./tables.sql:/docker-entrypoint-initdb.d/setup.sql

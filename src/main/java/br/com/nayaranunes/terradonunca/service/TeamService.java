@@ -5,7 +5,7 @@ import br.com.nayaranunes.terradonunca.domain.Team;
 import br.com.nayaranunes.terradonunca.exception.ApiRequestException;
 import br.com.nayaranunes.terradonunca.model.TeamRequest;
 import br.com.nayaranunes.terradonunca.model.TeamResponse;
-import br.com.nayaranunes.terradonunca.repository.PlayerDataAcessService;
+//import br.com.nayaranunes.terradonunca.repository.PlayerDataAcessService;
 import br.com.nayaranunes.terradonunca.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,15 +17,15 @@ import java.util.Random;
 @Service
 public class TeamService {
     private final TeamRepository teamRepository;
-    PlayerDataAcessService playerRepository = new PlayerDataAcessService();
+//    PlayerDataAcessService playerRepository = new PlayerDataAcessService();
 
     @Autowired
     public TeamService(@Qualifier("teamRepository") TeamRepository teamRepository) {
         this.teamRepository = teamRepository;
     }
 
-    PlayerDataAcessService playerDataAcessService = new PlayerDataAcessService();
-    PlayerService playerService = new PlayerService(playerDataAcessService);
+//    PlayerDataAcessService playerDataAcessService = new PlayerDataAcessService();
+//    PlayerService playerService = new PlayerService(playerDataAcessService);
 
     public int addTeam(TeamRequest request) {
        Random random = new Random();
@@ -33,9 +33,9 @@ public class TeamService {
        if (teamAlreadyExists(request.getCNPJ())) {
            throw new ApiRequestException("This team already exists");
        }
-       if (!(playerService.playersExists(request.getListOfPlayersCPF()))) {
-           throw new ApiRequestException("Any player of the list doesn't exists");
-       }
+//       if (!(playerService.playersExists(request.getListOfPlayersCPF()))) {
+//           throw new ApiRequestException("Any player of the list doesn't exists");
+//       }
        if (playerAlreadyHasTeam(request.getListOfPlayersCPF())) {
            throw new ApiRequestException("Any player of the list already has team");
        }
@@ -50,21 +50,22 @@ public class TeamService {
     }
 
     public void playersHasTime(List<String> cpf) {
-        List<Player> players = playerService.getPlayersByCPFList(cpf);
-        for (Player player : players){
-            player.setHasTime(true);
-        }
+//        List<Player> players = playerService.getPlayersByCPFList(cpf);
+//        for (Player player : players){
+//            player.setHasTime(true);
+//        }
     }
 
     public boolean playerAlreadyHasTeam(List<String> cpf) {
         int i = 0;
-        List<Player> players = playerService.getPlayersByCPFList(cpf);
-        for (Player player : players) {
-            if (player.isHasTime()) {
-                i++;
-            }
-        }
-        return i != 0;
+//        List<Player> players = playerService.getPlayersByCPFList(cpf);
+//        for (Player player : players) {
+//            if (player.isHasTime()) {
+//                i++;
+//            }
+//        }
+//        return i != 0;
+        return false;
     }
 
     public List<Team> getAllTeams() {
@@ -101,9 +102,10 @@ public class TeamService {
         if (teamRepository.selectTeamByCNPJ(cnpj) == null) {
             throw new ApiRequestException("None players exists");
         }
-        Team team = teamRepository.selectTeamByCNPJ(cnpj);
-        team.setListOfPlayers(playerService.getPlayersByCPFList(team.getListOfPlayersCPF()));
-        return team.getListOfPlayers();
+//        Team team = teamRepository.selectTeamByCNPJ(cnpj);
+//        team.setListOfPlayers(playerService.getPlayersByCPFList(team.getListOfPlayersCPF()));
+//        return team.getListOfPlayers();
+        return null;
     }
 
     public boolean teamsExists(List<String> teams) {
