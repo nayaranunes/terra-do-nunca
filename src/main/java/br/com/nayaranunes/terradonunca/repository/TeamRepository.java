@@ -1,30 +1,24 @@
 package br.com.nayaranunes.terradonunca.repository;
 
-import br.com.nayaranunes.terradonunca.domain.Player;
 import br.com.nayaranunes.terradonunca.domain.Team;
-import br.com.nayaranunes.terradonunca.model.TeamRequest;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface TeamRepository {
 
-    int insertTeam(Team team);
+public interface TeamRepository extends JpaRepository<Team, Integer> {
 
-    List<Team> selectAllTeams();
+    @Query(value = "SELECT t FROM Team t WHERE t.cnpj= ?1")
+    Team findByCnpj(String cnpj);
 
-    Team selectTeamByCNPJ(String cnpj);
+    @Query(value = "SELECT t FROM Team t WHERE t.championshipId= ?1")
+    List<Team> findAllByChampionshipId(Integer id);
 
-    int deleteTeamByCNPJ(String cnpj);
+    @Query(value = "SELECT t FROM Team t WHERE t.status= ?1")
+    List<Team> findAllChampions(Integer phase);
 
-    int updateTeamByCNPJ(String cnpj, TeamRequest request);
-
-    boolean teamsExists(List<String> teams);
-
-    Team selectTeamByName(String name);
-
-    List<Team> selectTeamsByNameList(List<String> teams);
-
-    boolean teamAlreadyExists(String cnpj);
-
+    @Query(value = "SELECT t FROM Team t WHERE t.status= ?1")
+    Team findChampion(Integer phase);
 }
 

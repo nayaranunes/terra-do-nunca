@@ -6,23 +6,22 @@ import java.util.List;
 
 public class TeamRequest {
 
+    public Integer championshipId;
     private String coach;
     @CNPJ
     private String cnpj;
     private String name;
-    private List<String> listOfPlayersCPF;
-    //private List<Player> listOfPlayers;
 
     public TeamRequest() {
         super();
     }
 
     public TeamRequest(String coach, String cnpj,
-                       String name, List<String> listOfPlayersCPF) {
+                       String name, Integer championshipId) {
         this.coach = coach;
         this.cnpj = cnpj;
         this.name = name;
-        this.listOfPlayersCPF = listOfPlayersCPF;
+        this.championshipId = championshipId;
     }
 
     public String getCoach() {
@@ -33,11 +32,11 @@ public class TeamRequest {
         this.coach = coach;
     }
 
-    public String getCNPJ() {
+    public String getCnpj() {
         return cnpj;
     }
 
-    public void setCNPJ(String cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 
@@ -49,21 +48,12 @@ public class TeamRequest {
         this.name = name;
     }
 
-    public List<String> getListOfPlayersCPF(){
-        return listOfPlayersCPF;
+    public Integer getChampionshipId() {
+        return championshipId;
     }
 
-    public void setListOfPlayersCPF(List<String> listOfPlayersCPF) {
-        this.listOfPlayersCPF = listOfPlayersCPF;
-    }
-/*
-    public List<Player> getListOfPlayers() {
-        return listOfPlayers;
+    public void setChampionshipId(Integer championshipId) {
+        this.championshipId = championshipId;
     }
 
-    public void setListOfPlayers(List<Player> listOfPlayers) {
-        this.listOfPlayers = listOfPlayers;
-    }
-
- */
 }

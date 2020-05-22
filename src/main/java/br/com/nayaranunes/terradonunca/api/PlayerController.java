@@ -1,6 +1,5 @@
 package br.com.nayaranunes.terradonunca.api;
 
-import br.com.nayaranunes.terradonunca.domain.Player;
 import br.com.nayaranunes.terradonunca.model.PlayerRequest;
 import br.com.nayaranunes.terradonunca.model.PlayerResponse;
 import br.com.nayaranunes.terradonunca.service.PlayerService;
@@ -26,22 +25,24 @@ public class PlayerController {
 
     @GetMapping
     public List<PlayerResponse> getAllPlayers() {
-        return playerService.getAllPlayers();
-    }
-
-    @PutMapping("/{cpf}")
-    public void updatePlayerByCPF(@PathVariable("cpf") String cpf, @RequestBody PlayerRequest request) {
-        playerService.updatePlayerByCPF(cpf, request);
-    }
-
-    @DeleteMapping("/{cpf}")
-    public void deletePlayerByCPF(@PathVariable("cpf") String cpf) {
-        playerService.deletePlayerByCPF(cpf);
+        return playerService.findAll();
     }
 
     @GetMapping("/{cpf}")
-    public PlayerResponse getPlayerByCPF(@PathVariable("cpf") String cpf) {
-        return playerService.getPlayerByCPF(cpf);
+    public PlayerResponse getPlayerById(@PathVariable("cpf") String cpf) {
+        return playerService.findByCpf(cpf);
+
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletePlayerByCPF(@PathVariable("id") Integer id) {
+        playerService.deleteById(id);
+    }
+
+    @PutMapping("/{id}")
+    public void updatePlayerById(@PathVariable("id") Integer id,
+                                 @RequestBody PlayerRequest request) {
+        playerService.updateById(id, request);
     }
 }
 

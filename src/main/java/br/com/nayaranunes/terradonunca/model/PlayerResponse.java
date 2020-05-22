@@ -1,17 +1,14 @@
 package br.com.nayaranunes.terradonunca.model;
 
-
 public class PlayerResponse {
     private String name;
     private String CPF;
+    private Integer teamId;
 
-    public PlayerResponse() {
-        super();
-    }
-
-    public PlayerResponse(String name, String CPF) {
+    public PlayerResponse(String name, String CPF, Integer teamId) {
         this.name = name;
         this.CPF = CPF;
+        this.teamId = teamId;
     }
 
     public String getName() {
@@ -28,5 +25,13 @@ public class PlayerResponse {
 
     public void setCPF(String CPF) {
         this.CPF = CPF;
+    }
+
+    public Integer getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(Integer teamId) {
+        this.teamId = teamId;
     }
 }

@@ -1,38 +1,36 @@
 package br.com.nayaranunes.terradonunca.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
-@Table(name = "player")
+@Table(name = "players")
 public class Player implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @NotNull
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "players_seq")
+    private Integer id;
+    @Column(name = "name")
     private String name;
-    @NotNull
-    private String CPF;
-    private boolean hasTime;
-    //MASTER bd DOMINIO
+    @Column(name = "cpf")
+    private String cpf;
+    @Column(name = "team_id")
+    private Integer teamId;
 
     public Player() {
-        super();
     }
 
-    public Player(Long id, String name, String CPF) {
-        this.id = id;
+    public Player(String name, String  cpf, Integer teamId) {
         this.name = name;
-        this.CPF = CPF;
+        this.cpf = cpf;
+        this.teamId = teamId;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -44,35 +42,19 @@ public class Player implements Serializable {
         this.name = name;
     }
 
-    public String getCPF() {
-        return CPF;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
-    public boolean isHasTime() {
-        return hasTime;
+    public Integer getTeamId() {
+        return teamId;
     }
 
-    public void setHasTime(boolean hasTime) {
-        this.hasTime = hasTime;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Player player = (Player) o;
-        return hasTime == player.hasTime &&
-                id.equals(player.id) &&
-                Objects.equals(name, player.name) &&
-                Objects.equals(CPF, player.CPF);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, CPF, hasTime);
+    public void setTeamId(Integer teamId) {
+        this.teamId = teamId;
     }
 }

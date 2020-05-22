@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/championships")
 public class ChampionshipController {
+
     private final ChampionshipService championshipService;
 
     @Autowired
@@ -18,34 +19,81 @@ public class ChampionshipController {
     }
 
     @PostMapping
-    private Long addPlayer(@RequestBody Championship championship) {
+    private Integer addChampionship(@RequestBody Championship championship) {
         return championshipService.addChampionship(championship);
     }
 
     @GetMapping
     public List<Championship> getAllChampionships() {
-        return championshipService.getAllChampionships();
+        return championshipService.findAll();
     }
 
-    @PutMapping("/{idOfChampionship}")
-    public int updateChampionshipById(@PathVariable("idOfChampionship") Long id,
+    @GetMapping("/{id}")
+    public Championship getChampionshipById(@PathVariable("id") Integer id) {
+        return championshipService.findById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public int deleteChampionshipById(@PathVariable("id") Integer id) {
+        return championshipService.deleteById(id);
+    }
+
+    @PutMapping("/{id}")
+    public int updateChampionshipById(@PathVariable("id") Integer id,
                                       @RequestBody Championship championship) {
-        return championshipService.updateChampionshipById(id, championship);
+        return championshipService.updateById(id, championship);
     }
 
-    @DeleteMapping("/{idOfChampionship}")
-    public int deleteChampionshipById(@PathVariable("idOfChampionship") Long id) {
-        return championshipService.deleteChampionshipById(id);
+    @GetMapping("/{id}/teams")
+    public List<Team> allTeams(@PathVariable("id") Integer id) {
+        return championshipService.allTeams(id);
     }
 
-    @GetMapping("/{idOfChampionship}")
-    public Championship getChampionshipById(@PathVariable("idOfChampionship") Long id) {
-        return championshipService.getChampionshipById(id);
+/*
+    @GetMapping("/{id}/oitavas")
+    public List<Math> oitavas(@PathVariable("id") Integer id) {
+        return championshipService.oitavas(id);
     }
 
-    @GetMapping("/table/{idOfChampionship}")
-    public Round tableById(@PathVariable("idOfChampionship") Long id) {
-        return championshipService.makeTableById(id);
+    @PostMapping("/{id}/oitavas")
+    public void oitavas(@PathVariable("id") Integer id, @RequestBody List<Integer> ids) {
+        championshipService.setChampions(id, ids);
+    }
+*/
+
+    @GetMapping("/{id}/quartas")
+    public List<List<Team>> quartas(@PathVariable("id") Integer id) {
+        return championshipService.quartas(id);
+    }
+
+    @PostMapping("/{id}/quartas")
+    public void oitavas(@PathVariable("id") Integer id, @RequestBody Champions ids) {
+        championshipService.setChampions(id, ids);
+    }
+
+    @GetMapping("/{id}/semi")
+    public List<List<Team>> semi(@PathVariable("id") Integer id) {
+        return championshipService.semi(id);
+    }
+
+    @PostMapping("/{id}/semi")
+    public void semi(@PathVariable("id") Integer id, @RequestBody Champions ids) {
+        championshipService.setChampions(id, ids);
+    }
+
+    @GetMapping("/{id}/final")
+    public List<Team> theFinal(@PathVariable("id") Integer id) {
+        return championshipService.theFinal(id);
+    }
+
+    @PostMapping("/{id}/final")
+    public void theFinal(@PathVariable("id") Integer id, @RequestBody Champions ids) {
+        championshipService.setChampions(id, ids);
+    }
+
+    @GetMapping("/{id}/champion")
+    public Team champion(@PathVariable("id") Integer id) {
+        return championshipService.champion(id);
     }
 
 }

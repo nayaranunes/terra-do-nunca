@@ -1,32 +1,24 @@
 package br.com.nayaranunes.terradonunca.domain;
 
-import java.util.List;
+import javax.persistence.*;
+import java.io.Serializable;
 
-public class Championship {
-    private int qtdOfTeams;
+@Entity
+@Table(name = "championships")
+public class Championship implements Serializable {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "championship_seq")
+    private Integer id;
+    @Column(name = "year")
     private int year;
-    private Long id;
+    @Column(name = "name")
     private String name;
-    private List<String> teams;
-    private String phase;
+    @Column(name = "phase")
+    private Integer phase;
 
     public Championship() {
         super();
-    }
-
-    public Championship(Long type, int year, String name, List<String> teams) {
-        this.id = id;
-        this.year = year;
-        this.name = name;
-        this.teams = teams;
-    }
-
-    public int getQtdOfTeams() {
-        return qtdOfTeams;
-    }
-
-    public void setQtdOfTeams(int qtdOfTeams) {
-        this.qtdOfTeams = qtdOfTeams;
     }
 
     public int getYear() {
@@ -45,27 +37,19 @@ public class Championship {
         this.name = name;
     }
 
-    public List<String> getTeams() {
-        return teams;
-    }
-
-    public void setTeams(List<String> teams) {
-        this.teams = teams;
-    }
-
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getPhase() {
+    public Integer getPhase() {
         return phase;
     }
 
-    public void setPhase(String phase) {
-        this.phase = phase;
+    public void setPhase() {
+        this.phase++;
     }
 }
