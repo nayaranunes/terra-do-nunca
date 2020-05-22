@@ -1,6 +1,5 @@
 package br.com.nayaranunes.terradonunca.api;
 
-import br.com.nayaranunes.terradonunca.domain.Player;
 import br.com.nayaranunes.terradonunca.domain.Team;
 import br.com.nayaranunes.terradonunca.model.TeamRequest;
 import br.com.nayaranunes.terradonunca.model.TeamResponse;
@@ -13,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/teams")
 public class TeamController {
+
     private final TeamService teamService;
 
     @Autowired
@@ -21,32 +21,37 @@ public class TeamController {
     }
 
     @PostMapping
-    private void addTeam(@RequestBody TeamRequest request){ //gets the json and saves the team
+    private void addTeam(@RequestBody TeamRequest request){
         teamService.addTeam(request);
     }
 
     @GetMapping
     public List<Team> getAllTeams(){
-        return teamService.getAllTeams();
+        return teamService.findAll();
     }
 
-    @PutMapping("/{cnpj}")
-    public void updateTeamByCNPJ(@PathVariable("cnpj") String cnpj, @RequestBody TeamRequest request) {
-        teamService.updateTeamByCNPJ(cnpj, request);
+    @GetMapping("/{id}")
+    public TeamResponse getTeamById(@PathVariable("id") Integer id) {
+        return teamService.findById(id);
     }
 
-    @DeleteMapping("/{cnpj}")
-    public void deleteTeamByCNPJ(@PathVariable("cnpj") String cnpj) {
-        teamService.deleteTeamByCNPJ(cnpj);
+    @GetMapping("teste/{id}")
+    public List<Team> aTeamById(@PathVariable("id") Integer id) {
+        return teamService.findAllTeams(id);
     }
 
-    @GetMapping("/{cnpj}")
-    public TeamResponse getTeamByCNPJ(@PathVariable("cnpj") String cnpj) {
-        return teamService.getTeamByCNPJ(cnpj);
+    @PutMapping("/{id}")
+    public void updateTeamById(@PathVariable("id") Integer id, @RequestBody TeamRequest request) {
+        teamService.updateById(id, request);
     }
 
-    @GetMapping("/players/{cnpj}")
-    public List<Player> getAllPlayersOfTeam(@PathVariable("cnpj") String cnpj){
-        return teamService.getAllPlayersByCnpj(cnpj);
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable("id") Integer id) {
+        teamService.deleteById(id);
     }
+
+//    @GetMapping("/players/{cnpj}")
+//    public List<Player> getAllPlayersOfTeam(@PathVariable("cnpj") String cnpj){
+//        return teamService.getAllPlayersByCnpj(cnpj);
+//    }
 }

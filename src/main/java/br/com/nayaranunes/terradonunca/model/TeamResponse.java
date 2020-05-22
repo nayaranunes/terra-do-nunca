@@ -1,26 +1,20 @@
 package br.com.nayaranunes.terradonunca.model;
 
-import br.com.nayaranunes.terradonunca.domain.Player;
-
-import java.util.List;
 
 public class TeamResponse {
     private String coach;
     private String cnpj;
     private String name;
-  //  private List<String> listOfPlayersCPF;
-    private List<Player> listOfPlayers;
 
     public TeamResponse() {
         super();
     }
 
     public TeamResponse(String coach, String cnpj,
-                       String name, List<Player> listOfPlayers) {
+                       String name) {
         this.coach = coach;
         this.cnpj = cnpj;
         this.name = name;
-        this.listOfPlayers = listOfPlayers;
     }
 
     public String getCoach() {
@@ -31,11 +25,11 @@ public class TeamResponse {
         this.coach = coach;
     }
 
-    public String getCNPJ() {
+    public String getCnpj() {
         return cnpj;
     }
 
-    public void setCNPJ(String cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 
@@ -45,22 +39,6 @@ public class TeamResponse {
 
     public void setName(String name) {
         this.name = name;
-    }
-/*
-    public List<String> getListOfPlayersCPF() {
-        return listOfPlayersCPF;
-    }
-
-    public void setListOfPlayersCPF(List<String> listOfPlayersCPF) {
-        this.listOfPlayersCPF = listOfPlayersCPF;
-    }
-*/
-    public List<Player> getListOfPlayers() {
-        return listOfPlayers;
-    }
-
-    public void setListOfPlayers(List<Player> listOfPlayers) {
-        this.listOfPlayers = listOfPlayers;
     }
 
 }

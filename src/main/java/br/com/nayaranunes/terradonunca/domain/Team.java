@@ -1,45 +1,43 @@
 package br.com.nayaranunes.terradonunca.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.io.Serializable;
 
-
-//@Entity
-//@Table(name = "teams")
-public class Team {
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    //@NotNull
+@Entity
+@Table(name = "teams")
+public class Team implements Serializable {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "teams_seq")
+    private Integer id;
+    @Column(name = "coach")
     private String coach;
-    //@NotNull
+    @Column(name = "cnpj")
     private String cnpj;
-    //@NotNull
+    @Column(name = "name")
     private String name;
-    //@NotBlank
-    private List<String> listOfPlayersCPF;
-    private List<Player> listOfPlayers;
+    @Column(name = "championship_id")
+    private Integer championshipId;
+    @Column(name = "status")
+    private Integer status;
 
     public Team() {
         super();
     }
 
-    public Team(Long id, String coach, String cnpj,
-                String name, List<String> listOfPlayersCPF) {
-        this.id = id;
+    public Team(String coach, String cnpj,
+                String name, Integer championshipId) {
         this.coach = coach;
         this.cnpj = cnpj;
         this.name = name;
-        this.listOfPlayersCPF = listOfPlayersCPF;
+        this.championshipId = championshipId;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -59,27 +57,27 @@ public class Team {
         this.name = name;
     }
 
-    public List<String> getListOfPlayersCPF() {
-        return listOfPlayersCPF;
-    }
-
-    public void setListOfPlayersCPF(List<String> listOfPlayersCPF) {
-        this.listOfPlayersCPF = listOfPlayersCPF;
-    }
-
-    public List<Player> getListOfPlayers() {
-        return listOfPlayers;
-    }
-
-    public void setListOfPlayers(List<Player> listOfPlayers) {
-        this.listOfPlayers = listOfPlayers;
-    }
-
-    public String getCNPJ() {
+    public String getCnpj() {
         return cnpj;
     }
 
-    public void setCNPJ(String cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
+    }
+
+    public Integer getChampionshipId() {
+        return championshipId;
+    }
+
+    public void setChampionshipId(Integer championshipId) {
+        this.championshipId = championshipId;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus() {
+        this.status++;
     }
 }

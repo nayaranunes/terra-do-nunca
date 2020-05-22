@@ -8,15 +8,22 @@ import java.io.Serializable;
 public class Player implements Serializable {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "players_seq")
     private Integer id;
-    @Column(name = "name_player")
-    private String namePlayer;
+    @Column(name = "name")
+    private String name;
     @Column(name = "cpf")
-    private String CPF;
-    @Column(name = "has_time")
-    private boolean hasTime;
+    private String cpf;
+    @Column(name = "team_id")
+    private Integer teamId;
 
     public Player() {
+    }
+
+    public Player(String name, String  cpf, Integer teamId) {
+        this.name = name;
+        this.cpf = cpf;
+        this.teamId = teamId;
     }
 
     public Integer getId() {
@@ -27,27 +34,27 @@ public class Player implements Serializable {
         this.id = id;
     }
 
-    public String getNamePlayer() {
-        return namePlayer;
+    public String getName() {
+        return name;
     }
 
-    public void setNamePlayer(String namePlayer) {
-        this.namePlayer = namePlayer;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCPF() {
-        return CPF;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
-    public boolean isHasTime() {
-        return hasTime;
+    public Integer getTeamId() {
+        return teamId;
     }
 
-    public void setHasTime(boolean hasTime) {
-        this.hasTime = hasTime;
+    public void setTeamId(Integer teamId) {
+        this.teamId = teamId;
     }
 }

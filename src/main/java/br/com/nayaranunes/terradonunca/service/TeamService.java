@@ -1,116 +1,85 @@
 package br.com.nayaranunes.terradonunca.service;
 
-import br.com.nayaranunes.terradonunca.domain.Player;
 import br.com.nayaranunes.terradonunca.domain.Team;
 import br.com.nayaranunes.terradonunca.exception.ApiRequestException;
 import br.com.nayaranunes.terradonunca.model.TeamRequest;
 import br.com.nayaranunes.terradonunca.model.TeamResponse;
-//import br.com.nayaranunes.terradonunca.repository.PlayerDataAcessService;
-import br.com.nayaranunes.terradonunca.repository.TeamDataAcessService;
 import br.com.nayaranunes.terradonunca.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Random;
 
 @Service
 public class TeamService {
 
-    private TeamRepository teamRepository = new TeamDataAcessService();
-//    PlayerDataAcessService playerRepository = new PlayerDataAcessService();
+    private final TeamRepository teamRepository;
 
-
-//    PlayerDataAcessService playerDataAcessService = new PlayerDataAcessService();
-//    PlayerService playerService = new PlayerService(playerDataAcessService);
+    @Autowired
+    public TeamService(TeamRepository teamRepository) {
+        this.teamRepository = teamRepository;
+    }
 
     public int addTeam(TeamRequest request) {
-       Random random = new Random();
-       Long id = Math.abs(random.nextLong());
-       if (teamAlreadyExists(request.getCNPJ())) {
+       if (teamRepository.findByCnpj(request.getCnpj()) != null) {
            throw new ApiRequestException("This team already exists");
        }
-//       if (!(playerService.playersExists(request.getListOfPlayersCPF()))) {
-//           throw new ApiRequestException("Any player of the list doesn't exists");
-//       }
-       if (playerAlreadyHasTeam(request.getListOfPlayersCPF())) {
-           throw new ApiRequestException("Any player of the list already has team");
-       }
-       playersHasTime(request.getListOfPlayersCPF());
-       Team team = new Team(id, request.getCoach(), request.getCNPJ(),
-                   request.getName(), request.getListOfPlayersCPF());
-       return teamRepository.insertTeam(team);
+       teamRepository.save(new Team(request.getCoach(), request.getCnpj(),
+               request.getName(), request.getChampionshipId()));
+       return 1;
     }
 
-    public boolean teamAlreadyExists(String cnpj) {
-        return teamRepository.teamAlreadyExists(cnpj);
-    }
-
-    public void playersHasTime(List<String> cpf) {
-//        List<Player> players = playerService.getPlayersByCPFList(cpf);
-//        for (Player player : players){
-//            player.setHasTime(true);
-//        }
-    }
-
-    public boolean playerAlreadyHasTeam(List<String> cpf) {
-        int i = 0;
-//        List<Player> players = playerService.getPlayersByCPFList(cpf);
-//        for (Player player : players) {
-//            if (player.isHasTime()) {
-//                i++;
-//            }
-//        }
-//        return i != 0;
-        return false;
-    }
-
-    public List<Team> getAllTeams() {
-        if (teamRepository.selectAllTeams() == null) {
+    public List<Team> findAll() {
+        if (teamRepository.findAll() == null) {
             throw new ApiRequestException("None team exists");
         }
-        return teamRepository.selectAllTeams();
+        return teamRepository.findAll();
     }
 
-    public TeamResponse getTeamByCNPJ(String cnpj) {
-        if (teamRepository.selectTeamByCNPJ(cnpj) == null) {
+    public TeamResponse findById(Integer id) {
+        if (teamRepository.findById(id).get() == null) {
             throw new ApiRequestException("This team doesn't exists");
         }
-        Team team = teamRepository.selectTeamByCNPJ(cnpj);
-        return new TeamResponse(team.getCoach(), team.getCNPJ(),
-                team.getName(), team.getListOfPlayers());
+        Team team = teamRepository.findById(id).get();
+        return new TeamResponse(team.getCoach(), team.getCnpj(),
+                team.getName());
     }
 
-    public int deleteTeamByCNPJ(String cnpj) {
-        if (teamRepository.deleteTeamByCNPJ(cnpj) == 0) {
+    public int deleteById(Integer id) {
+        if (teamRepository.findById(id).get() == null) {
             throw new ApiRequestException("This team doesn't exists");
         }
-        return teamRepository.deleteTeamByCNPJ(cnpj);
+        teamRepository.deleteById(id);
+        return 1;
     }
 
-    public int updateTeamByCNPJ(String cnpj, TeamRequest request) {
-        if (teamRepository.updateTeamByCNPJ(cnpj, request) == 0) {
-            throw new ApiRequestException("This team doesn't exists");
+    public int updateById(Integer id, TeamRequest request) {
+        var up = teamRepository.findById(id).get();
+        up.setCoach(request.getCoach());
+        up.setName(request.getName());
+        up.setCnpj(request.getCnpj());
+        teamRepository.save(up);
+        return 1;
+    }
+
+    public List<Team> findAllTeams(Integer id) {
+        return teamRepository.findAllByChampionshipId(id);
+    }
+
+    public void setChampionsTeams(List<Integer> ids) {
+        while (!ids.isEmpty()) {
+            Team team = teamRepository.findById(ids.get(0)).get();
+            team.setStatus();
+            teamRepository.save(team);
+            ids.remove(0);
         }
-        return teamRepository.updateTeamByCNPJ(cnpj, request);
     }
 
-    public List<Player> getAllPlayersByCnpj(String cnpj) {
-        if (teamRepository.selectTeamByCNPJ(cnpj) == null) {
-            throw new ApiRequestException("None players exists");
-        }
-//        Team team = teamRepository.selectTeamByCNPJ(cnpj);
-//        team.setListOfPlayers(playerService.getPlayersByCPFList(team.getListOfPlayersCPF()));
-//        return team.getListOfPlayers();
-        return null;
+    public List<Team> findAllChampions(Integer phase) {
+        return teamRepository.findAllChampions(phase);
     }
 
-    public boolean teamsExists(List<String> teams) {
-        return teamRepository.teamsExists(teams);
-    }
-
-    public List<Team> getTeamsByNameList(List<String> teams) {
-        return teamRepository.selectTeamsByNameList(teams);
+    public Team findChampion(Integer phase) {
+        return teamRepository.findChampion(phase);
     }
 }
