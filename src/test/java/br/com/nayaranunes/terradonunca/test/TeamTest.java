@@ -1,4 +1,3 @@
-/*
 package br.com.nayaranunes.terradonunca.test;
 
 import br.com.nayaranunes.terradonunca.domain.Player;
@@ -16,8 +15,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
-
 @RunWith(SpringRunner.class)
 public class TeamTest {
     @Mock
@@ -29,13 +26,12 @@ public class TeamTest {
     private Player player;
     private Team team;
     private TeamRequest request;
-    private List<String> listCPF;
+
     @Before
     public void setup() {
         teamService = new TeamService(teamRepository);
-        player = new Player("Ronaldo", "54545");
-        listCPF.add("54545");
-        request = new TeamRequest("Mauro", "5454-5", "Para", listCPF);
+        player = new Player("Ronaldo", "54545", 1);
+        request = new TeamRequest("Mauro", "5454-5", "Para", 1);
     }
 
     @Rule
@@ -46,9 +42,7 @@ public class TeamTest {
         //Team team = new Team("")
         Assertions.assertThat(this.teamService.addTeam(request) == 1);
         Assertions.assertThat(request.getCoach()).isEqualTo("Mauro");
-        Assertions.assertThat(request.getCNPJ()).isEqualTo("5454-5");
+        Assertions.assertThat(request.getCnpj()).isEqualTo("5454-5");
         Assertions.assertThat(request.getName()).isEqualTo("Para");
-        Assertions.assertThat(request.getListOfPlayersCPF()).isEqualTo(listCPF);
     }
 }
-*/

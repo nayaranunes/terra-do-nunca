@@ -49,18 +49,6 @@ public class ChampionshipController {
         return championshipService.allTeams(id);
     }
 
-/*
-    @GetMapping("/{id}/oitavas")
-    public List<Math> oitavas(@PathVariable("id") Integer id) {
-        return championshipService.oitavas(id);
-    }
-
-    @PostMapping("/{id}/oitavas")
-    public void oitavas(@PathVariable("id") Integer id, @RequestBody List<Integer> ids) {
-        championshipService.setChampions(id, ids);
-    }
-*/
-
     @GetMapping("/{id}/quartas")
     public List<List<Team>> quartas(@PathVariable("id") Integer id) {
         return championshipService.quartas(id);

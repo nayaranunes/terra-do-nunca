@@ -1,4 +1,3 @@
-/*
 package br.com.nayaranunes.terradonunca.test;
 
 import br.com.nayaranunes.terradonunca.domain.Player;
@@ -14,14 +13,14 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-//@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
-//@DataJpaTest
 
 @RunWith(SpringRunner.class)
 public class PlayerTest {
-    @Mock
+
+    @MockBean
     private PlayerRepository playerRepository;
 
     @InjectMocks
@@ -34,9 +33,9 @@ public class PlayerTest {
     @Before
     public void setup() {
         playerService = new PlayerService(playerRepository);
-        request = new PlayerRequest("Cassio", "54545");
-        response = new PlayerResponse("Fabio", "54321");
-        player = new Player("Rogerio", "12345");
+        request = new PlayerRequest("Cassio", "54545",1);
+        response = new PlayerResponse("Fabio", "54321",1);
+        player = new Player("Rogerio", "12345",1);
     }
 
     @Rule
@@ -46,23 +45,8 @@ public class PlayerTest {
     public void addPlayerOK() {
         Assertions.assertThat(this.playerService.addPlayer(request) == 1);
         Assertions.assertThat(request.getName()).isEqualTo("Cassio");
-        Assertions.assertThat(request.getCPF()).isEqualTo("54545");
+        Assertions.assertThat(request.getCpf()).isEqualTo("54545");
     }
 
-    @Test
-    public void playerAlreadyExistsOK() {
-        //Assertions.assertThat(playerService.playerAlreadyExists(player.getCPF())); //true
-       // Player p = new Player(); //this player does'nt exists in repository
-       // Assertions.assertThat(!(playerService.playerAlreadyExists(p.getCPF())));    //false
-    }
-    */
-/*
-    @Test
-    public void deletePlayerByCPF() {
-        this.playerService.addPlayer(request);
-        Assertions.assertThat(playerService.deletePlayerByCPF(request.getCPF())).isEqualTo(1);
-    }
-     *//*
 
 }
-*/

@@ -1,4 +1,4 @@
-package br.com.nayaranunes.terradonunca.api;
+package br.com.nayaranunes.terradonunca.domain;
 
 import java.util.List;
 

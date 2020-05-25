@@ -1,6 +1,6 @@
 package br.com.nayaranunes.terradonunca.service;
 
-import br.com.nayaranunes.terradonunca.api.Champions;
+import br.com.nayaranunes.terradonunca.domain.Champions;
 import br.com.nayaranunes.terradonunca.domain.*;
 import br.com.nayaranunes.terradonunca.exception.ApiRequestException;
 import br.com.nayaranunes.terradonunca.repository.ChampionshipRepository;
@@ -24,9 +24,9 @@ public class ChampionshipService {
     }
 
     public Integer addChampionship(Championship championship) {
-//        if (!championshipRepository.findByName(championship.getName())) {
-//            throw new ApiRequestException("The championship already exists");
-//        }
+        if (!championshipRepository.findByName(championship.getName())) {
+            throw new ApiRequestException("The championship already exists");
+        }
         championshipRepository.save(championship);
         return championship.getId();
     }
@@ -46,7 +46,7 @@ public class ChampionshipService {
     }
 
     public int deleteById(Integer id) {
-        if (championshipRepository.findById(id).get() == null) {
+        if (championshipRepository.findById(id) == null) {
             throw new ApiRequestException("This championship doesn't exists");
         }
         championshipRepository.deleteById(id);
@@ -54,9 +54,9 @@ public class ChampionshipService {
     }
 
     public int updateById(Integer id, Championship championship) {
-//        if (championshipRepository.getOne(id) == null) {
-//            throw new ApiRequestException("This championship doesn't exists");
-//        }
+        if (championshipRepository.findById(id).get() == null) {
+            throw new ApiRequestException("This championship doesn't exists");
+        }
         var up = championshipRepository.findById(id).get();
         up.setYear(championship.getYear());
         up.setName(championship.getName());
@@ -65,6 +65,9 @@ public class ChampionshipService {
     }
 
     public List<Team> allTeams(Integer id) {
+        if (teamService.findAllTeams(id) == null) {
+            throw new ApiRequestException("None team registered");
+        }
         return teamService.findAllTeams(id);
     }
 
@@ -76,17 +79,6 @@ public class ChampionshipService {
         ids.getChampions().forEach(i -> championsID.add(i));
         teamService.setChampionsTeams(championsID);
     }
-/*
-    public List<Team> oitavas(Integer id) {
-        var c = championshipRepository.findById(id).get();
-        List<Team> listOfTeams = teamService.findAllTeams(id);
-        int qtdOfTeams = listOfTeams.size();
-
-        //+8
-        return new Round (null, mataMataPar(listOfTeams));
-
-
-    }*/
 
     public List<List<Team>> quartas(Integer id) {
         List<Team> listOfTeams = teamService.findAllTeams(id);
@@ -109,35 +101,6 @@ public class ChampionshipService {
         return teamService.findChampion(championship.getPhase());
 
     }
-/*
-    public List<Math> semi(Integer id) {
-        //4 times
-        return mataMata(listOfTeams, qtdOfTeams);
-
-    }
-
-    public Math theFinal(Integer id) {
-        //2 times
-    }
-
-    public List<Math> mataMata(List<Team> listOfTeams, int qtdOfTeams) {
-        int index = 0;
-        if (qtdOfTeams < 8 && qtdOfTeams >= 4) {
-            index = ((qtdOfTeams - 4) * 2);
-        }
-        if (qtdOfTeams > 8 && qtdOfTeams < 16) {
-            index = ((qtdOfTeams - 8) * 2);
-        }
-        int qtdNextPhase = qtdOfTeams - index;
-        List<Team> teams = new ArrayList<>();
-        while (qtdNextPhase != 0) {
-            teams.add(listOfTeams.get(0));
-            listOfTeams.remove(0);
-            qtdNextPhase--;
-        }
-        nextPhase.setTeams(teams);
-        return new Round(nextPhase, mataMataPar(listOfTeams));
-    }*/
 
     public List<List<Team>> mataMataPar(List<Team> listOfTeams) {
         List<List<Team>> matchs = new ArrayList<>();
@@ -159,5 +122,12 @@ public class ChampionshipService {
         listOfTeams.remove(randomIndex2);
         return match;
     }
-
+/*
+        if (qtdOfTeams < 8 && qtdOfTeams >= 4) {
+            index = ((qtdOfTeams - 4) * 2);
+        }
+        if (qtdOfTeams > 8 && qtdOfTeams < 16) {
+            index = ((qtdOfTeams - 8) * 2);
+        }
+*/
 }

@@ -50,8 +50,5 @@ public class TeamController {
         teamService.deleteById(id);
     }
 
-//    @GetMapping("/players/{cnpj}")
-//    public List<Player> getAllPlayersOfTeam(@PathVariable("cnpj") String cnpj){
-//        return teamService.getAllPlayersByCnpj(cnpj);
-//    }
+
 }

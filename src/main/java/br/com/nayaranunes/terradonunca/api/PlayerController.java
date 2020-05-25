@@ -1,5 +1,6 @@
 package br.com.nayaranunes.terradonunca.api;
 
+import br.com.nayaranunes.terradonunca.exception.ApiRequestException;
 import br.com.nayaranunes.terradonunca.model.PlayerRequest;
 import br.com.nayaranunes.terradonunca.model.PlayerResponse;
 import br.com.nayaranunes.terradonunca.service.PlayerService;
@@ -29,13 +30,12 @@ public class PlayerController {
     }
 
     @GetMapping("/{cpf}")
-    public PlayerResponse getPlayerById(@PathVariable("cpf") String cpf) {
+    public PlayerResponse getPlayerByCpf(@PathVariable("cpf") String cpf) {
         return playerService.findByCpf(cpf);
-
     }
 
     @DeleteMapping("/{id}")
-    public void deletePlayerByCPF(@PathVariable("id") Integer id) {
+    public void deletePlayerById(@PathVariable("id") Integer id) {
         playerService.deleteById(id);
     }
 
@@ -44,5 +44,6 @@ public class PlayerController {
                                  @RequestBody PlayerRequest request) {
         playerService.updateById(id, request);
     }
+
 }
 

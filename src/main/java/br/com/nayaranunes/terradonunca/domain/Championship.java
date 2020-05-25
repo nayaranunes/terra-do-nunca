@@ -21,6 +21,13 @@ public class Championship implements Serializable {
         super();
     }
 
+    public Championship(Integer id, int year, String name, Integer phase) {
+        this.id = id;
+        this.year = year;
+        this.name = name;
+        this.phase = phase;
+    }
+
     public int getYear() {
         return year;
     }
