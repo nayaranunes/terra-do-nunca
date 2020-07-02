@@ -3,6 +3,8 @@ package br.com.nayaranunes.terradonunca;
 import br.com.nayaranunes.terradonunca.entitys.Team;
 import br.com.nayaranunes.terradonunca.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,34 +26,23 @@ public class TeamController {
     }
 
     @GetMapping
-    public List<Team> getAllTeams(){
-        return teamService.findAll();
+    public ResponseEntity<List<Team>> getAllTeams(){
+        return new ResponseEntity<>(teamService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public TeamResponse getTeamById(@PathVariable("id") Integer id) {
-        return teamService.findById(id);
+    public ResponseEntity<TeamResponse> getTeamById(@PathVariable("id") Integer id) {
+        return new ResponseEntity<>(teamService.findById(id), HttpStatus.OK);
     }
 
     @GetMapping("teste/{id}")
-    public List<Team> aTeamById(@PathVariable("id") Integer id) {
-        return teamService.findAllTeams(id);
+    public ResponseEntity<List<Team>> aTeamById(@PathVariable("id") Integer id) {
+        return new ResponseEntity<>(teamService.findAllTeams(id), HttpStatus.OK);
     }
-/*
-
-    @PutMapping("/{id}")
-    public void updateTeamById(@PathVariable("id") Integer id, @RequestBody TeamRequest request) {
-        teamService.updateById(id, request);
-    }
-*/
 
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable("id") Integer id) {
         teamService.deleteById(id);
     }
 
-//    @GetMapping("/players/{cnpj}")
-//    public List<Player> getAllPlayersOfTeam(@PathVariable("cnpj") String cnpj){
-//        return teamService.getAllPlayersByCnpj(cnpj);
-//    }
 }
