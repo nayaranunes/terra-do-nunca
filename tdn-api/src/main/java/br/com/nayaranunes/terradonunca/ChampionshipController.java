@@ -5,6 +5,8 @@ import br.com.nayaranunes.terradonunca.entitys.Championship;
 import br.com.nayaranunes.terradonunca.entitys.Team;
 import br.com.nayaranunes.terradonunca.service.ChampionshipService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,50 +23,39 @@ public class ChampionshipController {
     }
 
     @PostMapping
-    private Integer addChampionship(@RequestBody Championship championship) {
-        return championshipService.addChampionship(championship);
+    private ResponseEntity<Integer> addChampionship(@RequestBody Championship championship) {
+        return new ResponseEntity<>(championshipService.addChampionship(championship), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public List<Championship> getAllChampionships() {
-        return championshipService.findAll();
+    public ResponseEntity<List<Championship>> getAllChampionships() {
+        return new ResponseEntity<>(championshipService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Championship getChampionshipById(@PathVariable("id") Integer id) {
-        return championshipService.findById(id);
+    public ResponseEntity<Championship> getChampionshipById(@PathVariable("id") Integer id) {
+        return new ResponseEntity<>(championshipService.findById(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public int deleteChampionshipById(@PathVariable("id") Integer id) {
-        return championshipService.deleteById(id);
+    public ResponseEntity<Integer> deleteChampionshipById(@PathVariable("id") Integer id) {
+        return new ResponseEntity<>(championshipService.deleteById(id), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public int updateChampionshipById(@PathVariable("id") Integer id,
+    public ResponseEntity<Integer> updateChampionshipById(@PathVariable("id") Integer id,
                                       @RequestBody Championship championship) {
-        return championshipService.updateById(id, championship);
+        return new ResponseEntity<>(championshipService.updateById(id, championship), HttpStatus.OK);
     }
 
     @GetMapping("/{id}/teams")
-    public List<Team> allTeams(@PathVariable("id") Integer id) {
-        return championshipService.allTeams(id);
+    public ResponseEntity<List<Team>> allTeams(@PathVariable("id") Integer id) {
+        return new ResponseEntity<>(championshipService.allTeams(id), HttpStatus.OK);
     }
-
-/*
-    @GetMapping("/{id}/oitavas")
-    public List<Math> oitavas(@PathVariable("id") Integer id) {
-        return championshipService.oitavas(id);
-    }
-    @PostMapping("/{id}/oitavas")
-    public void oitavas(@PathVariable("id") Integer id, @RequestBody List<Integer> ids) {
-        championshipService.setChampions(id, ids);
-    }
-*/
 
     @GetMapping("/{id}/quartas")
-    public List<List<Team>> quartas(@PathVariable("id") Integer id) {
-        return championshipService.quartas(id);
+    public ResponseEntity<List<List<Team>>> quartas(@PathVariable("id") Integer id) {
+        return new ResponseEntity<>(championshipService.quartas(id), HttpStatus.OK);
     }
 
     @PostMapping("/{id}/quartas")
@@ -73,8 +64,8 @@ public class ChampionshipController {
     }
 
     @GetMapping("/{id}/semi")
-    public List<List<Team>> semi(@PathVariable("id") Integer id) {
-        return championshipService.semi(id);
+    public ResponseEntity<List<List<Team>>> semi(@PathVariable("id") Integer id) {
+        return new ResponseEntity<>(championshipService.semi(id), HttpStatus.OK);
     }
 
     @PostMapping("/{id}/semi")
@@ -83,8 +74,8 @@ public class ChampionshipController {
     }
 
     @GetMapping("/{id}/final")
-    public List<Team> theFinal(@PathVariable("id") Integer id) {
-        return championshipService.theFinal(id);
+    public ResponseEntity<List<Team>> theFinal(@PathVariable("id") Integer id) {
+        return new ResponseEntity<>(championshipService.theFinal(id), HttpStatus.OK);
     }
 
     @PostMapping("/{id}/final")
@@ -93,8 +84,8 @@ public class ChampionshipController {
     }
 
     @GetMapping("/{id}/champion")
-    public Team champion(@PathVariable("id") Integer id) {
-        return championshipService.champion(id);
+    public ResponseEntity<Team> champion(@PathVariable("id") Integer id) {
+        return new ResponseEntity<>(championshipService.champion(id), HttpStatus.OK);
     }
 
 }

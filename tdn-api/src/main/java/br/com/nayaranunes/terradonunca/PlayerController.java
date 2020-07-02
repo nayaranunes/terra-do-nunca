@@ -2,6 +2,8 @@ package br.com.nayaranunes.terradonunca;
 
 import br.com.nayaranunes.terradonunca.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,13 +24,13 @@ public class PlayerController {
     }
 
     @GetMapping
-    public List<PlayerResponse> getAllPlayers() {
-        return playerService.findAll();
+    public ResponseEntity<List<PlayerResponse>> getAllPlayers() {
+        return new ResponseEntity<>(playerService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{cpf}")
-    public PlayerResponse getPlayerById(@PathVariable("cpf") String cpf) {
-        return playerService.findByCpf(cpf);
+    public ResponseEntity<PlayerResponse> getPlayerById(@PathVariable("cpf") String cpf) {
+        return new ResponseEntity<>(playerService.findByCpf(cpf), HttpStatus.OK);
 
     }
 
